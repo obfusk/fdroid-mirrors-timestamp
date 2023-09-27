@@ -15,7 +15,7 @@ for mirror in "${mirrors[@]}"; do
   for component in repo archive; do
     if ts="$(curl -s "$mirror"/"$component"/entry.json | jq -r .timestamp 2>/dev/null)"; then
       echo "$mirror [$component]:"
-      date -d @"$(( "$ts" / 1000 ))"
+      date +'%FT%T' -d @"$(( "$ts" / 1000 ))"
     fi
   done
   echo
