@@ -20,7 +20,7 @@ onion_mirrors=(
 )
 
 check_mirror() {
-  local mirror="$1" onion="$2"
+  local mirror="$1" onion="${2:-}"
   if [ "$onion" = --onion ]; then
     curl=( curl --socks5-hostname localhost:9050 -s )
   else
@@ -53,7 +53,7 @@ for mirror in "${mirrors[@]}"; do
   check_mirror "$mirror"
 done
 
-if [ "$2" = --onions ]; then
+if [ "${1:-}" = --onions ]; then
   for mirror in "${onion_mirrors[@]}"; do
     check_mirror "$mirror" --onion
   done
