@@ -3,13 +3,13 @@ set -e
 mirrors=(
   https://f-droid.org
   https://fdroid.tetaneutral.net/fdroid
-  https://ftp.agdsn.de/fdroid
+  https://ftp.agdsn.de/fdroid                   # primary
   https://ftp.fau.de/fdroid
-  https://ftp.lysator.liu.se/pub/fdroid
+  https://ftp.lysator.liu.se/pub/fdroid         # primary
   https://mirror.cyberbits.eu/fdroid
   https://mirror.fcix.net/fdroid
   https://mirror.ossplanet.net/fdroid
-  https://plug-mirror.rcac.purdue.edu/fdroid
+  https://plug-mirror.rcac.purdue.edu/fdroid    # primary
 )
 for mirror in "${mirrors[@]}"; do
   for component in repo archive; do
