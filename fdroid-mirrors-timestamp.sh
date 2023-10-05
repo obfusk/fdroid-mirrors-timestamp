@@ -69,23 +69,22 @@ check_mirror() {
         else
           fdroid_archive_ts="$ts"
         fi
+        [ -t 1 ] && ts="\033[0;36m$ts\033[0m"
       elif [[ ( "$component" == repo && "$ts" != "$fdroid_repo_ts" ) || \
               ( "$component" == archive && "$ts" != "$fdroid_archive_ts" ) ]]; then
-        if [ -t 1 ]; then
-          ts="\033[0;31m$ts\033[0m"
-        fi
         exitcode=2
+        [ -t 1 ] && ts="\033[0;31m$ts\033[0m"
+      else
+        [ -t 1 ] && ts="\033[0;32m$ts\033[0m"
       fi
       echo -e "$ts"
     else
       err=missing
       if [ "$component" = repo ] || [ "$mirror" = "${mirrors[0]}" ]; then
         exitcode=2
-        if [ -t 1 ]; then
-          err="\033[0;31m$err\033[0m"
-        fi
-      elif [ -t 1 ]; then
-        err="\033[0;33m$err\033[0m"
+        [ -t 1 ] && err="\033[0;31m$err\033[0m"
+      else
+        [ -t 1 ] && err="\033[0;33m$err\033[0m"
       fi
       echo -e "$err"
       if [ "$mirror" = "${mirrors[0]}" ]; then
