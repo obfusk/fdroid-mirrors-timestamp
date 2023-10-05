@@ -95,21 +95,29 @@ for arg in "$@"; do
   esac
 done
 
+echo "==> Official mirrors"
+echo
 for mirror in "${mirrors[@]}"; do
   check_mirror "$mirror"
 done
 
 if [ "$check_unofficial" = yes ]; then
+  echo "==> Unofficial mirrors"
+  echo
   for mirror in "${unofficial_mirrors[@]}"; do
     check_mirror "$mirror"
   done
 fi
 
 if [ "$check_onion" = yes ]; then
+  echo "==> Official onion mirrors"
+  echo
   for mirror in "${onion_mirrors[@]}"; do
     check_mirror "$mirror" --onion
   done
   if [ "$check_unofficial" = yes ]; then
+    echo "==> Unofficial onion mirrors"
+    echo
     for mirror in "${unofficial_onion_mirrors[@]}"; do
       check_mirror "$mirror" --onion
     done
