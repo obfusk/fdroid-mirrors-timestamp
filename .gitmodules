@@ -1,0 +1,3 @@
+[submodule "fdroid-statuspage-deployment"]
+	path = fdroid-statuspage-deployment
+	url = https://gitlab.com/fdroid/fdroid-statuspage-deployment.git
