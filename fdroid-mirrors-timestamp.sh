@@ -1,4 +1,6 @@
 #!/bin/bash
+# SPDX-FileCopyrightText: 2023 FC Stegerman <flx@obfusk.net>
+# SPDX-License-Identifier: AGPL-3.0-or-later
 set -euo pipefail
 
 statuspage_yml=fdroid-statuspage-deployment/group_vars/all.yml
