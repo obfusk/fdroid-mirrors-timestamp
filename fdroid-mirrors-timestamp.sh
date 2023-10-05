@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
+check_onion=no check_unofficial=no exitcode=0
+
+usage='Usage: fdroid-mirrors-timestamp.sh [--onion] [--unofficial]'
+
 mirrors=(
   https://f-droid.org
   https://fdroid.tetaneutral.net/fdroid
@@ -70,14 +74,13 @@ check_mirror() {
                           ( "$component" == archive && \
                             "$ts" != "$fdroid_archive_ts" ) ]]; then
         ts="\033[0;31m$ts\033[0m"
+        exitcode=2
       fi
       echo -e "$ts"
     fi
   done
   echo
 }
-
-check_onion=no check_unofficial=no
 
 for arg in "$@"; do
   case "$arg" in
@@ -87,9 +90,13 @@ for arg in "$@"; do
     --unofficial)
       check_unofficial=yes
     ;;
+    --help)
+      echo "$usage" >&2
+      exit
+    ;;
     *)
       echo "Unknown option: $arg" >&2
-      echo "Usage: fdroid-mirrors-timestamp.sh [--onion] [--unofficial]" >&2
+      echo "$usage" >&2
       exit 1
     ;;
   esac
@@ -123,3 +130,5 @@ if [ "$check_onion" = yes ]; then
     done
   fi
 fi
+
+exit "$exitcode"
