@@ -59,9 +59,9 @@ check_mirror() {
     curl=( curl -s )
   fi
   for component in repo archive; do
+    echo "$mirror [$component]:"
     if ts="$( "${curl[@]}" "$mirror"/"$component"/entry.json \
               | jq -r .timestamp 2>/dev/null )"; then
-      echo "$mirror [$component]:"
       ts="$(date +'%FT%T %Z' -d @"$(( "$ts" / 1000 ))")"
       if [ "$mirror" = "${mirrors[0]}" ]; then
         if [ "$component" = repo ]; then
@@ -77,6 +77,17 @@ check_mirror() {
         exitcode=2
       fi
       echo -e "$ts"
+    else
+      if [ "$component" = repo ] || [ "$mirror" = "${mirrors[0]}" ]; then
+        echo -e "\033[0;31mmissing\033[0m"
+        if [ "$mirror" = "${mirrors[0]}" ]; then
+          exit 3
+        else
+          exitcode=2
+        fi
+      else
+        echo -e "\033[0;33mmissing\033[0m"
+      fi
     fi
   done
   echo
