@@ -97,10 +97,10 @@ check_mirror() {
 
 for arg in "$@"; do
   case "$arg" in
-    --onion)
+    --onion|-o)
       check_onion=yes
     ;;
-    --unofficial)
+    --unofficial|-u)
       check_unofficial=yes
     ;;
     --help)
