@@ -11,7 +11,7 @@ usage='Usage: fdroid-mirrors-timestamp.sh [--onion] [--unofficial]'
 check_mirror() {
   local mirror="$1" onion="${2:-}"
   if [ "$onion" = --onion ]; then
-    curl=( curl --socks5-hostname localhost:9050 --connect-timeout 5 -s )
+    curl=( curl --socks5-hostname localhost:9050 --connect-timeout 10 -s )
   else
     curl=( curl -s )
   fi
